@@ -1,3 +1,5 @@
+const SelectorBuilder = require('./SelectorBuilder');
+const SelectorCombine = require('./SelectorCombine');
 /* ************************************************************************************************
  *                                                                                                *
  * Please read the following tutorial before implementing tasks:                                   *
@@ -400,36 +402,43 @@ function group(array, keySelector, valueSelector) {
  *
  *  For more examples see unit tests.
  */
+// element, id, class, attribute, pseudo-class, pseudo-element
 
 const cssSelectorBuilder = {
-  element(/* value */) {
-    throw new Error('Not implemented');
+  element(value) {
+    return new SelectorBuilder().element(value);
   },
 
-  id(/* value */) {
-    throw new Error('Not implemented');
+  id(value) {
+    return new SelectorBuilder().id(value);
   },
 
-  class(/* value */) {
-    throw new Error('Not implemented');
+  class(value) {
+    return new SelectorBuilder().class(value);
   },
 
-  attr(/* value */) {
-    throw new Error('Not implemented');
+  attr(value) {
+    return new SelectorBuilder().attr(value);
   },
 
-  pseudoClass(/* value */) {
-    throw new Error('Not implemented');
+  pseudoClass(value) {
+    return new SelectorBuilder().pseudoClass(value);
   },
 
-  pseudoElement(/* value */) {
-    throw new Error('Not implemented');
+  pseudoElement(value) {
+    return new SelectorBuilder().pseudoElement(value);
   },
 
-  combine(/* selector1, combinator, selector2 */) {
-    throw new Error('Not implemented');
+  combine(selector1, combinator, selector2) {
+    return new SelectorCombine(selector1, combinator, selector2);
   },
 };
+// let test = cssSelectorBuilder.combine(
+//   cssSelectorBuilder.element('p').pseudoClass('focus'),
+//   '>',
+//   cssSelectorBuilder.element('a').attr('href$=".png"')
+// ).stringify();
+// console.log(test);
 
 module.exports = {
   shallowCopy,
